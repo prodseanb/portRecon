@@ -4,12 +4,13 @@ import sys
 from datetime import datetime
 import platform
 import subprocess
+from subprocess import PIPE, Popen
 
 def connect(ip, port, output):
 	# create socket object
 	obj = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-	socket.setdefaulttimeout(12)
+	socket.setdefaulttimeout(60)
 	try:
 		obj.connect((ip, port))
 		output[port] = 'Open'
@@ -24,19 +25,19 @@ def scan(host):
 
 	try:
 		# create threads
-		subprocess.call('ulimit -n 5000', shell=True) # add more file handles/set to 5000
-		for i in range(5000):
+		for i in range(main.MAX_ports):
 			t = threading.Thread(target=connect, args=(host, i, output))
 			threads.append(t)
-
+	
 		# start threads
-		for i in range(5000):
+		for i in range(main.MAX_ports):
 			threads[i].start()
+
 		# lock main thread until all threads finish
-		for i in range(5000):
+		for i in range(main.MAX_ports):
 			threads[i].join()
 
-		for i in range(5000):
+		for i in range(main.MAX_ports):
 			if output[i] == 'Open':
 				try: # get the service name
 					serv = socket.getservbyport(i)
@@ -44,6 +45,7 @@ def scan(host):
 					serv = 'none'
 				print('[Hit] ' + host + ':' + str(i) + ' = ' 
 					+ output[i] + '        [*] SERVICE: ' + serv)
+
 	except KeyboardInterrupt:
 		print("\n[Ign] Keyboard Interrupt -- Exiting...")
 		sys.exit()
@@ -63,8 +65,15 @@ def main():
 		# Clear the screen
 		if platform.system() == "Windows":
 			subprocess.call('cls', shell=True)
+			main.MAX_ports = 1000
 		else:
 			subprocess.call('clear', shell=True)
+			# check the limit of open file descriptors 
+			command = "ulimit -n"
+			with Popen(command, stdout=PIPE, stderr=None, shell=True) as process:
+				# store in a constant
+				main.MAX_ports = int(process.communicate()[0].decode("utf-8"))
+		
 
 		# extract target's hostname -- gonna need this for gethostbyname()
 		ip = input("Remote host to scan: ")
@@ -93,6 +102,7 @@ def main():
 */
 
 [*] Scanning: {host}
+[*] # of ports to scan: {main.MAX_ports}
 [*] Please wait...
 			''')
 			scan(host)

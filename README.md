@@ -32,5 +32,11 @@ This commit (with threads):
 [Hit] 172.16.101.134:443 = Open        [*] SERVICE: https
 [Hit] 172.16.101.134:1883 = Open        [*] SERVICE: none
 ```
+### Scan more ports
+On Linux: `ulimit -n [limit]`.<br />
+On Windows, find this line and adjust the value:
+```python
+main.MAX_ports = 1000
+```
 ### Let's work...
 As an open-source advocate, I invite you to work with me on this project. Send me a pull request. 🤘 Want to conduct other business? Send me a message on [LinkedIn](https://www.linkedin.com/in/sean-bachiller-40b63417b/). 
