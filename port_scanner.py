@@ -24,18 +24,19 @@ def scan(host):
 
 	try:
 		# create threads
-		for i in range(1000):
+		subprocess.call('ulimit -n 5000', shell=True) # add more file handles/set to 5000
+		for i in range(5000):
 			t = threading.Thread(target=connect, args=(host, i, output))
 			threads.append(t)
 
 		# start threads
-		for i in range(1000):
+		for i in range(5000):
 			threads[i].start()
 		# lock main thread until all threads finish
-		for i in range(1000):
+		for i in range(5000):
 			threads[i].join()
 
-		for i in range(1000):
+		for i in range(5000):
 			if output[i] == 'Open':
 				try: # get the service name
 					serv = socket.getservbyport(i)
