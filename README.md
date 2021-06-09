@@ -27,9 +27,9 @@ This commit (with threads):
 ```
 ### Identifies open/listening ports and services
 ```
-[Hit] 192.168.1.1:53 = Open        [*] SERVICE: domain
-[Hit] 192.168.1.1:80 = Open        [*] SERVICE: http
-[Hit] 192.168.1.1:443 = Open        [*] SERVICE: https
+[Hit] 172.16.101.134:53 = Open        [*] SERVICE: domain
+[Hit] 172.16.101.134:80 = Open        [*] SERVICE: http
+[Hit] 172.16.101.134:443 = Open        [*] SERVICE: https
 ```
 ### Let's work...
 As an open-source advocate, I invite you to work with me on this project. Send me a pull request. 🤘 Want to conduct other business? Send me a message on [LinkedIn](https://www.linkedin.com/in/sean-bachiller-40b63417b/). 
