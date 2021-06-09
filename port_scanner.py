@@ -10,7 +10,7 @@ def connect(ip, port, output):
 	# create socket object
 	obj = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-	socket.setdefaulttimeout(60)
+	socket.setdefaulttimeout(2)
 	try:
 		obj.connect((ip, port))
 		output[port] = 'Open'
@@ -68,12 +68,13 @@ def main():
 			main.MAX_ports = 1000
 		else:
 			subprocess.call('clear', shell=True)
+
 			# check the limit of open file descriptors 
 			command = "ulimit -n"
 			with Popen(command, stdout=PIPE, stderr=None, shell=True) as process:
 				# store in a constant
-				main.MAX_ports = int(process.communicate()[0].decode("utf-8"))
-		
+				max_ports = int(process.communicate()[0].decode("utf-8"))
+				main.MAX_ports = max_ports - 100
 
 		# extract target's hostname -- gonna need this for gethostbyname()
 		ip = input("Remote host to scan: ")

@@ -14,6 +14,7 @@ Essential reconnaissance tool, identifies open ports and services using the [soc
 *
 */
 [*] Scanning: {host}
+[*] # of ports to scan: {main.MAX_ports}
 [*] Please wait...
 ```
 ### Faster, more efficient
