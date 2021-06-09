@@ -41,7 +41,7 @@ def scan(host):
 					serv = socket.getservbyport(i)
 				except socket.error:
 					serv = 'none'
-				print('[Hit] ' + host + ':' + str(i) + ': ' 
+				print('[Hit] ' + host + ':' + str(i) + ' = ' 
 					+ output[i] + '        [*] SERVICE: ' + serv)
 	except KeyboardInterrupt:
 		print("\n[Ign] Keyboard Interrupt -- Exiting...")
