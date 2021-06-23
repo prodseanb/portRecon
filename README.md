@@ -42,16 +42,22 @@ ____¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶
 ### Installation
 Clone:
 ```bash
-https://github.com/prodseanb/scanme.git
+git clone https://github.com/prodseanb/scanme.git
 ```
 Run:
 ```bash
+cd scanme
 run.py [target]
 ```
 Examples:
 ```bash
 run.py scanme.nmap.org
 run.py 172.16.101.134
+```
+### Run on Docker
+```bash
+sudo docker pull prodseanb/scanme
+sudo docker run -t -i scanme [target]
 ```
 ### Faster, more efficient
 Using [threads](https://docs.python.org/3/library/threading.html) to maximize scanning efficiency.
