@@ -47,12 +47,12 @@ git clone https://github.com/prodseanb/scanme.git
 Run:
 ```bash
 cd scanme
-run.py [target]
+python3 run.py [target]
 ```
 Examples:
 ```bash
-run.py scanme.nmap.org
-run.py 172.16.101.134
+python3 run.py scanme.nmap.org
+python3 run.py 172.16.101.134
 ```
 ### Run on Docker
 ```bash
