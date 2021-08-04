@@ -1,4 +1,4 @@
-# scanme
+# Port Reconnaissance
 Single IP port recon tool, identifies open ports and services using the [sockets](https://docs.python.org/3/library/socket.html) module.
 ```
 ______________¶¶¶
